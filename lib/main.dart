@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stat_flutter/team_screen.dart';
+import 'package:stat_flutter/screens/login_screen.dart';
+import 'package:stat_flutter/screens/registration_screen.dart';
+import 'package:stat_flutter/screens/team_screen.dart';
+import 'package:stat_flutter/screens/welcome_screen.dart';
 
 void main() {
   runApp(Stat());
@@ -13,7 +16,13 @@ class Stat extends StatelessWidget {
       theme: ThemeData(
         backgroundColor: Colors.transparent,
       ),
-      home: TeamScreen(),
+      initialRoute: WelcomeScreen.id,
+      routes: {
+        WelcomeScreen.id: (context) => WelcomeScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
+        RegistrationScreen.id: (context) => RegistrationScreen(),
+        TeamScreen.id: (context) => TeamScreen(),
+      },
     );
   }
 }
