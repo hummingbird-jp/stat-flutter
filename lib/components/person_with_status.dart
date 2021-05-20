@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PersonWithStatus extends StatelessWidget {
-  final IconData person;
+  final NetworkImage userImage;
   final IconData status;
 
-  PersonWithStatus({@required this.person, @required this.status});
+  PersonWithStatus({@required this.userImage, @required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +12,15 @@ class PersonWithStatus extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            person,
-            size: 50.0,
+          CircleAvatar(
+            backgroundImage: userImage,
+            radius: 60.0,
           ),
-          Icon(status),
+          Icon(
+            status,
+            color: status == Icons.check ? Colors.green : Colors.red,
+            size: 40.0,
+          ),
         ],
       ),
     );
