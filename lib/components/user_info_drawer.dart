@@ -20,8 +20,19 @@ class UserInfoDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountEmail: Text('${loggedInUser.email}'),
-            accountName: Text('${_auth.currentUser.displayName}'),
+            accountEmail: Text(
+              '${loggedInUser.email}',
+              style: TextStyle(
+                fontSize: 12.0,
+              ),
+            ),
+            accountName: Text(
+              '${_auth.currentUser.displayName}',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           ListTile(
             title: Text(
