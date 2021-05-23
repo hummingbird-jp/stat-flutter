@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:stat_flutter/components/person_with_status.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stat_flutter/components/rounded_button.dart';
+import 'package:stat_flutter/components/rounded_outline_button.dart';
 import 'package:stat_flutter/screens/login_screen.dart';
-//import 'package:stat_flutter/components/rounded_outline_button.dart';
 
 //enum Status {
 //  close,
@@ -55,35 +55,16 @@ class _TeamScreenState extends State<TeamScreen> {
     }
   }
 
-  //IconData updateStatus() {
-  //  const oneSec = Duration(seconds: 1);
-  //  Timer.periodic(oneSec, (timer) {
-  //    if (isUpdateStopped == true) {
-  //      timer.cancel();
-  //      return Icons.stop;
-  //    } else {
-  //      //print('isUpdateStopped: $isUpdateStopped');
-  //      int pick = Random().nextInt(Status.values.length);
-  //      Status status = Status.values[pick];
-  //      if (status == Status.close) {
-  //        return Icons.close;
-  //      } else if (status == Status.check) {
-  //        return Icons.check;
-  //      } else {
-  //        return Icons.warning;
-  //      }
-  //    }
-  //  });
-  //}
-
-  void sendStatus() {
+  void sendStatus(String status) {
     const updateInterval = Duration(seconds: 5);
 
     Timer.periodic(updateInterval, (timer) {
-      _firestore.collection('statuses').add({
-        'status': 'test status',
-        'userEmail': loggedInUser.email,
-      });
+      if (isUpdateStopped == false) {
+        _firestore.collection('statuses').add({
+          'status': status,
+          'userEmail': loggedInUser.email,
+        });
+      }
     });
   }
 
@@ -131,16 +112,18 @@ class _TeamScreenState extends State<TeamScreen> {
               color: Theme.of(context).colorScheme.secondary,
               label: 'RUN!',
               onPressed: () {
-                sendStatus();
+                isUpdateStopped = false;
+                String status = 'fine';
+                sendStatus(status);
               },
             ),
-            //RoundedOutlineButton(
-            //  color: Theme.of(context).colorScheme.secondary,
-            //  label: 'STOP',
-            //  onPressed: () {
-            //    isUpdateStopped = true;
-            //  },
-            //)
+            RoundedOutlineButton(
+              color: Theme.of(context).colorScheme.secondary,
+              label: 'STOP',
+              onPressed: () {
+                isUpdateStopped = true;
+              },
+            )
           ],
         ),
       ),
