@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:stat_flutter/components/rounded_outline_button.dart';
 import 'package:stat_flutter/constants.dart';
-import 'package:stat_flutter/components/rounded_button.dart';
 import 'package:stat_flutter/screens/login_failed_screen.dart';
 import 'package:stat_flutter/screens/team_screen.dart';
 

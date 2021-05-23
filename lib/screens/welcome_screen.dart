@@ -18,6 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Stat! Flutter'),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(

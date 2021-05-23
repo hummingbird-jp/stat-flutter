@@ -12,8 +12,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  // limit window size
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('App title');
+    setWindowTitle('Stat! Flutter');
     setWindowMinSize(const Size(700, 500));
     setWindowMaxSize(Size.infinite);
   }

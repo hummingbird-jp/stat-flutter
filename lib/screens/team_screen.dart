@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stat_flutter/components/person_with_status.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:stat_flutter/screens/welcome_screen.dart';
 
 class TeamScreen extends StatefulWidget {
   static const String id = 'team_screen';
@@ -9,6 +11,8 @@ class TeamScreen extends StatefulWidget {
 }
 
 class _TeamScreenState extends State<TeamScreen> {
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +44,32 @@ class _TeamScreenState extends State<TeamScreen> {
                     'https://media-exp1.licdn.com/dms/image/C5103AQEQRhS5GU68WA/profile-displayphoto-shrink_400_400/0/1545331992316?e=1626912000&v=beta&t=cJdEYKOYACtwZ0-qRA3S3b_Ddax4NH6Z-1dGGCNmtrg'),
                 status: Icons.close,
               ),
+            ),
+          ],
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.background,
+              ),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: Text(
+                'Log out',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () async {
+                await _auth.signOut();
+                Navigator.pop(context);
+                Navigator.pushNamed(context, WelcomeScreen.id);
+              },
             ),
           ],
         ),
