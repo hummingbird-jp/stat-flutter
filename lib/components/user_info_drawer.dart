@@ -21,7 +21,7 @@ class UserInfoDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountEmail: Text('${loggedInUser.email}'),
-            accountName: Text('Test User'),
+            accountName: Text('${_auth.currentUser.displayName}'),
           ),
           ListTile(
             title: Text(

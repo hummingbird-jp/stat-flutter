@@ -16,6 +16,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+  String displayName;
   bool isInProgress = false;
 
   @override
@@ -47,7 +48,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintStyle: kHintTextStyle,
-                  hintText: 'Enter your email',
+                  hintText: 'What is your email?',
                 ),
               ),
               SizedBox(
@@ -61,7 +62,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintStyle: kHintTextStyle,
-                  hintText: 'Enter your password',
+                  hintText: 'What is your new password?',
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  displayName = value;
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                  hintStyle: kHintTextStyle,
+                  hintText: 'What do people call you?',
                 ),
               ),
               SizedBox(
@@ -78,14 +92,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     });
 
                     try {
-                      final newUser =
-                          await _auth.createUserWithEmailAndPassword(
-                              email: email, password: password);
-
-                      if (newUser != null) {
-                        Navigator.pushNamed(context, TeamScreen.id);
-                      }
+                      await _auth
+                          .createUserWithEmailAndPassword(
+                              email: email, password: password)
+                          .then((result) {
+                        return result.user.updateProfile(
+                          displayName: displayName,
+                        );
+                      });
                       isInProgress = false;
+                      Navigator.pushNamed(context, TeamScreen.id);
                     } catch (e) {
                       print(e);
                     }
