@@ -70,7 +70,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Hero(
                 tag: 'register button',
                 child: RoundedButton(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   label: 'Register',
                   onPressed: () async {
                     setState(() {

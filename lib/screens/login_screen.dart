@@ -22,9 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Log In'),
-      ),
+      appBar: AppBar(),
       body: ModalProgressHUD(
         inAsyncCall: isInProgress,
         child: Padding(
@@ -73,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Hero(
                 tag: 'login button',
                 child: RoundedOutlineButton(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   label: 'Log In',
                   onPressed: () async {
                     setState(() {

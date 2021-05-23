@@ -37,7 +37,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Hero(
               tag: 'login button',
               child: RoundedOutlineButton(
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
                 label: 'Log In',
                 onPressed: () {
                   Navigator.pushNamed(context, LoginScreen.id);
@@ -50,12 +50,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Hero(
               tag: 'register button',
               child: RoundedButton(
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
                 label: 'Register',
                 onPressed: () {
                   Navigator.pushNamed(context, RegistrationScreen.id);
                 },
               ),
+            ),
+            SizedBox(
+              height: 8.0,
             ),
           ],
         ),
