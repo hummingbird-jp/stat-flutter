@@ -21,8 +21,10 @@ class StatusBrain {
           Status status = getStatus;
 
           await _firestore.collection('statuses').add({
+            // TODO: calcurate status with poseNet
             'status': status == Status.fine ? 'Fine' : 'Not Fine',
             'userEmail': loggedInUser.email,
+            'timestamp': new DateTime.now(),
           });
         } on FirebaseException catch (e) {
           print('FirebaseException: $e');
