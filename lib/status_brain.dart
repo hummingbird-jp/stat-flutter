@@ -12,7 +12,7 @@ class StatusBrain {
   final _firestore = FirebaseFirestore.instance;
   static bool isUpdateRunning = true;
 
-  Future<void> sendStatus(User loggedInUser) async {
+  Future<void> sendStatus(User? loggedInUser) async {
     const updateInterval = Duration(seconds: 5);
 
     Timer.periodic(updateInterval, (timer) async {
@@ -23,7 +23,7 @@ class StatusBrain {
           await _firestore.collection('statuses').add({
             // TODO: calcurate status with poseNet
             'status': status == Status.fine ? 'Fine' : 'Not Fine',
-            'userEmail': loggedInUser.email,
+            'userEmail': loggedInUser!.email,
             'timestamp': new DateTime.now(),
           });
         } on FirebaseException catch (e) {

@@ -15,8 +15,8 @@ class TeamScreen extends StatefulWidget {
 
 class _TeamScreenState extends State<TeamScreen> {
   final _auth = FirebaseAuth.instance;
-  User loggedInUser;
-  String status;
+  User? loggedInUser;
+  String? status;
   bool isInProgress = false;
 
   @override

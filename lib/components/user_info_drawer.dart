@@ -4,13 +4,13 @@ import 'package:stat_flutter/screens/welcome_screen.dart';
 
 class UserInfoDrawer extends StatelessWidget {
   const UserInfoDrawer({
-    Key key,
-    @required this.loggedInUser,
-    @required FirebaseAuth auth,
+    Key? key,
+    required this.loggedInUser,
+    required FirebaseAuth auth,
   })  : _auth = auth,
         super(key: key);
 
-  final User loggedInUser;
+  final User? loggedInUser;
   final FirebaseAuth _auth;
 
   @override
@@ -21,13 +21,13 @@ class UserInfoDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountEmail: Text(
-              '${loggedInUser.email}',
+              '${loggedInUser!.email}',
               style: TextStyle(
                 fontSize: 12.0,
               ),
             ),
             accountName: Text(
-              '${_auth.currentUser.displayName}',
+              '${_auth.currentUser!.displayName}',
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
