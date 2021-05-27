@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:window_size/window_size.dart';
 import 'package:flutter/material.dart';
 import 'package:stat_flutter/screens/login_failed_screen.dart';
 import 'package:stat_flutter/screens/login_screen.dart';
@@ -6,18 +7,17 @@ import 'package:stat_flutter/screens/registration_screen.dart';
 import 'package:stat_flutter/screens/team_screen.dart';
 import 'package:stat_flutter/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:window_size/window_size.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  await WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
   // limit window size
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('Stat! Flutter');
-    setWindowMinSize(const Size(700, 500));
-    setWindowMaxSize(Size.infinite);
-  }
+  //if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+  //  setWindowTitle('Stat! Flutter');
+  //  setWindowMinSize(const Size(700, 500));
+  //  setWindowMaxSize(Size.infinite);
+  //}
   runApp(Stat());
 }
 
