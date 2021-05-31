@@ -17,21 +17,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stat! Flutter'),
+        title: const Text('Stat! Flutter'),
         automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Hero(
+            const Hero(
               tag: 'Stat! logo',
               child: CircleAvatar(
                 backgroundImage: AssetImage('images/logo.jpg'),
                 radius: 70.0,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
             Hero(
@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             Hero(
@@ -57,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
           ],

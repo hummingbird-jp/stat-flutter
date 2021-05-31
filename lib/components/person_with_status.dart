@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class PersonWithStatus extends StatelessWidget {
   final NetworkImage userImage;
   final IconData status;
 
-  PersonWithStatus({required this.userImage, required this.status});
+  const PersonWithStatus({required this.userImage, required this.status});
 
   @override
   Widget build(BuildContext context) {

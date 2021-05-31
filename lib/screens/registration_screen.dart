@@ -22,18 +22,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 200.0),
+        padding: const EdgeInsets.symmetric(horizontal: 200.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Hero(
+            const Hero(
               tag: 'Stat! logo',
               child: CircleAvatar(
                 backgroundImage: AssetImage('images/logo.jpg'),
                 radius: 50.0,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
             TextField(
@@ -47,7 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 hintText: 'What is your email?',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             TextField(
@@ -61,7 +61,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 hintText: 'What is your new password?',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             TextField(
@@ -74,7 +74,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 hintText: 'What do people call you?',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24.0,
             ),
             Hero(
@@ -95,7 +95,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     });
                     Navigator.pushNamed(context, TeamScreen.id);
                   } catch (e) {
-                    print(e);
+                    throw (FirebaseAuthException);
                   }
                 },
               ),

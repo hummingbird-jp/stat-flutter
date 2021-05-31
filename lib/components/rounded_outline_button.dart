@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class RoundedOutlineButton extends StatelessWidget {
   final Color color;
   final String label;
   final Function onPressed;
 
-  RoundedOutlineButton({
+  const RoundedOutlineButton({
     required this.color,
     required this.label,
     required this.onPressed,
@@ -14,12 +15,12 @@ class RoundedOutlineButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
         elevation: 5.0,
         color: Colors.transparent,
         shape: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(30.0),
           ),
           borderSide: BorderSide(color: color),

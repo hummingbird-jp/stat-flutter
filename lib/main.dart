@@ -10,7 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 Future<void> main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
   if (WebRTC.platformIsDesktop) {
@@ -29,11 +29,11 @@ class Stat extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: WelcomeScreen.id,
       theme: ThemeData.dark().copyWith(
-        primaryColor: Color(0xFF0D0F25),
-        scaffoldBackgroundColor: Color(0xFF0D0F25),
-        accentColor: Color(0xFFEB1555),
+        primaryColor: const Color(0xFF0D0F25),
+        scaffoldBackgroundColor: const Color(0xFF0D0F25),
+        accentColor: const Color(0xFFEB1555),
         errorColor: Colors.red,
-        colorScheme: ColorScheme(
+        colorScheme: const ColorScheme(
           primary: Color(0xFF0D0F25),
           primaryVariant: Color(0xFF0D0F25),
           secondary: Color(0xFFEB1555),

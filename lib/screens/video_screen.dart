@@ -43,7 +43,7 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Camera test'),
+        title: const Text('Camera test'),
       ),
       body: SafeArea(
         child: Center(

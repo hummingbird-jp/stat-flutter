@@ -24,20 +24,17 @@ class StatusBrain {
             // TODO: calcurate status with poseNet
             'status': status == Status.fine ? 'Fine' : 'Not Fine',
             'userEmail': loggedInUser!.email,
-            'timestamp': new DateTime.now(),
+            'timestamp': DateTime.now(),
           });
-        } on FirebaseException catch (e) {
-          print('FirebaseException: $e');
         } catch (e) {
-          print('Other Exception: $e');
+          rethrow;
         }
       }
     });
   }
 
   Status get getStatus {
-    int pick = new Random().nextInt(Status.values.length);
-    print(Status.values[pick]);
+    int pick = Random().nextInt(Status.values.length);
     return Status.values[pick];
   }
 

@@ -20,10 +20,8 @@ class _LoginFailedScreenState extends State<LoginFailedScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: Container(
-              child: Text('Log In failed...'),
-            ),
+          const Center(
+            child: Text('Log In failed...'),
           ),
           RoundedButton(
             color: Colors.grey,

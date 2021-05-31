@@ -21,21 +21,21 @@ class UserInfoDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountEmail: Text(
-              '${loggedInUser!.email}',
-              style: TextStyle(
+              '$loggedInUser!.email',
+              style: const TextStyle(
                 fontSize: 12.0,
               ),
             ),
             accountName: Text(
-              '${_auth.currentUser!.displayName}',
-              style: TextStyle(
+              '$_auth.currentUser!.displayName',
+              style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           ListTile(
-            title: Text(
+            title: const Text(
               'Log out',
               style: TextStyle(
                 decoration: TextDecoration.underline,

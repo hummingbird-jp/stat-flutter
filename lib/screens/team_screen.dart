@@ -33,10 +33,8 @@ class _TeamScreenState extends State<TeamScreen> {
       if (tmpUser != null) {
         loggedInUser = tmpUser;
       }
-    } on FirebaseAuthException catch (e) {
-      print('FirebaseAuthException in getCurrencUser: $e');
     } catch (e) {
-      print('Other Exception in getCurrentUser: $e');
+      rethrow;
     }
   }
 
@@ -44,31 +42,31 @@ class _TeamScreenState extends State<TeamScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stat! Flutter'),
+        title: const Text('Stat! Flutter'),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 100.0),
+        padding: const EdgeInsets.symmetric(horizontal: 100.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
+                const Expanded(
                   child: PersonWithStatus(
                     userImage: NetworkImage(
                         'https://media-exp1.licdn.com/dms/image/C5603AQG7D1xY_YtA6g/profile-displayphoto-shrink_400_400/0/1615853413089?e=1626912000&v=beta&t=aWaLslh_IrP6C-OHWnEYOM_4v5tfv35TgWfM5foBKcs'),
                     status: Icons.close,
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: PersonWithStatus(
                     userImage: NetworkImage(
                         'https://media-exp1.licdn.com/dms/image/C5603AQGGhBt6Ckxytg/profile-displayphoto-shrink_400_400/0/1604068708768?e=1626912000&v=beta&t=vc4GysO1ftX8OUB6psN6XJkuz-QdNfygRx2WrCrPgcA'),
                     status: Icons.check,
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: PersonWithStatus(
                     userImage: NetworkImage(
                         'https://media-exp1.licdn.com/dms/image/C5103AQEQRhS5GU68WA/profile-displayphoto-shrink_400_400/0/1545331992316?e=1626912000&v=beta&t=cJdEYKOYACtwZ0-qRA3S3b_Ddax4NH6Z-1dGGCNmtrg'),
@@ -77,7 +75,7 @@ class _TeamScreenState extends State<TeamScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             RoundedButton(
@@ -87,8 +85,8 @@ class _TeamScreenState extends State<TeamScreen> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Sending your status!'),
-                    content: Text('Press STOP to stop sending.'),
+                    title: const Text('Sending your status!'),
+                    content: const Text('Press STOP to stop sending.'),
                     actions: [
                       TextButton(
                         onPressed: () {
@@ -127,8 +125,8 @@ class _TeamScreenState extends State<TeamScreen> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Status sending paused'),
-                    content: Text('Press RUN! to resume.'),
+                    title: const Text('Status sending paused'),
+                    content: const Text('Press RUN! to resume.'),
                     actions: [
                       TextButton(
                         onPressed: () {
