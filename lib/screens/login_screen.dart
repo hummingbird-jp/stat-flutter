@@ -70,13 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Theme.of(context).colorScheme.secondary,
                 label: 'Log In',
                 onPressed: () async {
+                  // TODO: show progress circle while logging in
                   try {
-                    final user = await _auth.signInWithEmailAndPassword(
+                    CircularProgressIndicator();
+                    await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
-
-                    if (user != null) {
-                      Navigator.pushNamed(context, TeamScreen.id);
-                    }
+                    Navigator.pushNamed(context, TeamScreen.id);
                   } catch (e) {
                     Navigator.pushNamed(context, LoginFailedScreen.id);
                   }

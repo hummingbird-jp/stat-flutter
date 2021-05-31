@@ -84,6 +84,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 label: 'Register',
                 onPressed: () async {
                   try {
+                    // TODO: show progress circle while logging in
                     await _auth
                         .createUserWithEmailAndPassword(
                             email: email, password: password)

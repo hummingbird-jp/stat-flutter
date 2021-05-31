@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stat_flutter/components/rounded_button.dart';
 import 'package:stat_flutter/components/rounded_outline_button.dart';
 import 'package:stat_flutter/components/user_info_drawer.dart';
+import 'package:stat_flutter/screens/video_screen.dart';
 
 class TeamScreen extends StatefulWidget {
   static const String id = 'team_screen';
@@ -143,6 +144,13 @@ class _TeamScreenState extends State<TeamScreen> {
                   ),
                 );
               },
+            ),
+            RoundedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, VideoScreen.id);
+              },
+              label: 'START VIDEO',
+              color: Theme.of(context).backgroundColor,
             ),
           ],
         ),
