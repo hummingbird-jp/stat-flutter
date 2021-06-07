@@ -53,7 +53,7 @@ class Stat extends StatelessWidget {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
-        TeamScreen.id: (context) => TeamScreen(),
+        TeamScreen.id: (context) => const TeamScreen(),
         LoginFailedScreen.id: (context) => LoginFailedScreen(),
         VideoScreen.id: (context) => VideoScreen(),
       },
