@@ -21,13 +21,13 @@ class UserInfoDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountEmail: Text(
-              '$loggedInUser!.email',
+              '${loggedInUser!.email}',
               style: const TextStyle(
                 fontSize: 12.0,
               ),
             ),
             accountName: Text(
-              '$_auth.currentUser!.displayName',
+              '${_auth.currentUser!.displayName}',
               style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
