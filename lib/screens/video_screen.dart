@@ -39,6 +39,8 @@ class _VideoScreenState extends State<VideoScreen> {
     _videoElement.play();
   }
 
+  bool _active = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +56,23 @@ class _VideoScreenState extends State<VideoScreen> {
                   child: _webcamWidget,
                 ),
               ),
+              Switch(
+                  value: _active,
+                  activeColor: Theme.of(context).colorScheme.secondary,
+                  inactiveThumbColor: Theme.of(context).colorScheme.primary,
+                  onChanged: _active
+                      ? (bool active) {
+                          setState(() {
+                            _active = active;
+                            _videoElement.pause();
+                          });
+                        }
+                      : (bool active) {
+                          setState(() {
+                            _active = active;
+                            _videoElement.play();
+                          });
+                        }),
             ],
           ),
         ),

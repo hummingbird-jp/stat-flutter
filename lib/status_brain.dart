@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,13 +38,4 @@ class StatusBrain {
     int pick = Random().nextInt(Status.values.length);
     return Status.values[pick];
   }
-
-  // TODO: implement statusStream
-  //void statusStream() async {
-  //  await for (var snapshot in _firestore.collection('statuses').snapshots()) {
-  //    for (var status in snapshot.docs) {
-  //      print(status.data());
-  //    }
-  //  }
-  //}
 }
