@@ -1,17 +1,18 @@
 var db = firebase.firestore();
 
-function sendStatusToFirestore(isInView) {
+function sendStatusToFirestore(isInView, email) {
 	try {
 		db.collection("statuses").add({
+			'timestamp': new Date(),
 			'isInView': isInView,
-			'userEmail': "test@email.com",
+			'userEmail': email,
 		});
 	} catch (e) {
 		console.error(`Failed to send status: ${e}`);
 	}
 }
 
-async function estimatePoseOnVideo(videoElement) {
+async function estimatePoseOnVideo(videoElement, email) {
 	const poseNet = await posenet.load();
 	let pose;
 	try {
@@ -27,7 +28,7 @@ async function estimatePoseOnVideo(videoElement) {
 	console.log(message);
 	console.log(`pose.score: ${pose.score}`);
 
-	sendStatusToFirestore(isInView);
+	sendStatusToFirestore(isInView, email);
 
 	return isInView;
 }

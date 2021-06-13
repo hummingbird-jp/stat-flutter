@@ -1,12 +1,12 @@
 @JS()
 library posenet;
 
-import 'package:js/js.dart';
 import 'dart:html';
+import 'package:js/js.dart';
 
-void callPoseNet(VideoElement videoElement) {
-  estimatePoseOnVideo(videoElement);
+void callPoseNet(VideoElement videoElement, String email) {
+  estimatePoseOnVideo(videoElement, email);
 }
 
 @JS()
-external void estimatePoseOnVideo(VideoElement videoElement);
+external void estimatePoseOnVideo(VideoElement videoElement, String email);

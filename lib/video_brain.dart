@@ -1,9 +1,7 @@
 import 'dart:html';
 import 'dart:ui' as ui;
-import 'package:flutter/material.dart';
 
 class VideoBrain {
-  late Widget _webcamWidget;
   final VideoElement _videoElement = VideoElement();
 
   Future<VideoElement> getVideoElement() async {
@@ -11,12 +9,6 @@ class VideoBrain {
       'videoElement',
       (int viewId) => _videoElement,
     );
-
-    _webcamWidget = HtmlElementView(
-      key: UniqueKey(),
-      viewType: 'videoElement',
-    );
-
     window.navigator
         .getUserMedia(
       video: true,
@@ -24,8 +16,7 @@ class VideoBrain {
         .then((MediaStream mediaStream) {
       _videoElement.srcObject = mediaStream;
     });
-
-    //_videoElement.play();
+    _videoElement.play();
 
     return _videoElement;
   }

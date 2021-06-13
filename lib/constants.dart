@@ -31,3 +31,5 @@ const kTextFieldDecoration = InputDecoration(
 TextStyle kHintTextStyle = TextStyle(
   color: Colors.grey[400],
 );
+
+const kGoogleMeetUrl = 'https://meet.google.com/gok-xiph-ity';
