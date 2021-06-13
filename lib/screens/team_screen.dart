@@ -141,13 +141,15 @@ class _TeamScreenState extends State<TeamScreen> {
                       });
                     }
                   },
+                  disabled: isRunning,
                   label: 'RUN',
                   color: Theme.of(context).colorScheme.secondary,
                 ),
-                RoundedOutlineButton(
+                RoundedButton(
                   onPressed: () {
                     launch(kGoogleMeetUrl);
                   },
+                  disabled: !isRunning,
                   label: 'TALK',
                   color: Theme.of(context).colorScheme.secondary,
                 ),
