@@ -7,6 +7,8 @@ import 'package:stat_flutter/screens/team_screen.dart';
 import 'package:stat_flutter/components/thin_circular_progress_indicator.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   static const String id = 'login_screen';
 
   @override

@@ -4,6 +4,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class VideoScreen extends StatefulWidget {
+  const VideoScreen({Key? key}) : super(key: key);
+
   static const String id = 'video_screen';
 
   @override

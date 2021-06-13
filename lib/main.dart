@@ -19,10 +19,12 @@ Future<void> main() async {
     setWindowMaxSize(Size.infinite);
   }
 
-  runApp(Stat());
+  runApp(const Stat());
 }
 
 class Stat extends StatelessWidget {
+  const Stat({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,12 +52,12 @@ class Stat extends StatelessWidget {
         ),
       ),
       routes: {
-        WelcomeScreen.id: (context) => WelcomeScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        RegistrationScreen.id: (context) => RegistrationScreen(),
+        WelcomeScreen.id: (context) => const WelcomeScreen(),
+        LoginScreen.id: (context) => const LoginScreen(),
+        RegistrationScreen.id: (context) => const RegistrationScreen(),
         TeamScreen.id: (context) => const TeamScreen(),
-        LoginFailedScreen.id: (context) => LoginFailedScreen(),
-        VideoScreen.id: (context) => VideoScreen(),
+        LoginFailedScreen.id: (context) => const LoginFailedScreen(),
+        VideoScreen.id: (context) => const VideoScreen(),
       },
     );
   }

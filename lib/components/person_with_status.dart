@@ -5,7 +5,11 @@ class PersonWithStatus extends StatelessWidget {
   final NetworkImage userImage;
   final IconData status;
 
-  const PersonWithStatus({required this.userImage, required this.status});
+  const PersonWithStatus({
+    Key? key,
+    required this.userImage,
+    required this.status,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

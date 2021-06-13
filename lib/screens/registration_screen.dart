@@ -6,6 +6,8 @@ import 'package:stat_flutter/screens/team_screen.dart';
 import 'package:stat_flutter/components/rounded_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
+
   static const String id = 'registration_screen';
 
   @override

@@ -6,6 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:stat_flutter/screens/registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
+
   static const String id = 'welcome_screen';
 
   @override

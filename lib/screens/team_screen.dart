@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:stat_flutter/components/person_with_status.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stat_flutter/components/rounded_button.dart';
-import 'package:stat_flutter/components/rounded_outline_button.dart';
 import 'package:stat_flutter/components/user_info_drawer.dart';
 import 'package:stat_flutter/utils/bridge_to_js.dart';
 import 'package:stat_flutter/utils/constants.dart';

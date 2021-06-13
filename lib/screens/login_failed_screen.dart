@@ -3,6 +3,8 @@ import 'package:stat_flutter/components/rounded_button.dart';
 import 'package:stat_flutter/screens/welcome_screen.dart';
 
 class LoginFailedScreen extends StatefulWidget {
+  const LoginFailedScreen({Key? key}) : super(key: key);
+
   static const String id = 'login_failed_screen';
 
   @override
