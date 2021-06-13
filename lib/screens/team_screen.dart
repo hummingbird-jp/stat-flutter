@@ -85,7 +85,13 @@ class _TeamScreenState extends State<TeamScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Stat! Flutter'),
+        title: const Text(
+          'YOUR TEAM',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            letterSpacing: 3.0,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 100.0),
