@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:stat_flutter/components/person_with_status.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stat_flutter/components/rounded_button.dart';
+import 'package:stat_flutter/components/rounded_outline_button.dart';
 import 'package:stat_flutter/components/user_info_drawer.dart';
-import 'package:stat_flutter/call_posenet.dart';
-import 'package:stat_flutter/constants.dart';
-import 'package:stat_flutter/video_brain.dart';
+import 'package:stat_flutter/utils/bridge_to_js.dart';
+import 'package:stat_flutter/utils/constants.dart';
+import 'package:stat_flutter/utils/video_brain.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:stat_flutter/components/thin_circular_progress_indicator.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -26,7 +28,8 @@ class _TeamScreenState extends State<TeamScreen> {
   final _auth = FirebaseAuth.instance;
   User? loggedInUser;
   String? status;
-  bool isRunning = true;
+  bool isRunning = false;
+  bool isLoading = false;
   bool userAIsInView = false;
   bool userBIsInView = false;
   bool userCIsInView = false;
@@ -86,56 +89,79 @@ class _TeamScreenState extends State<TeamScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 100.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: [
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: PersonWithStatus(
-                    userImage: const NetworkImage(
-                        'https://media-exp1.licdn.com/dms/image/C5603AQG7D1xY_YtA6g/profile-displayphoto-shrink_400_400/0/1615853413089?e=1626912000&v=beta&t=aWaLslh_IrP6C-OHWnEYOM_4v5tfv35TgWfM5foBKcs'),
-                    status: getUserAStatusIcon(),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: PersonWithStatus(
+                        userImage: const NetworkImage(
+                            'https://media-exp1.licdn.com/dms/image/C5603AQG7D1xY_YtA6g/profile-displayphoto-shrink_400_400/0/1615853413089?e=1626912000&v=beta&t=aWaLslh_IrP6C-OHWnEYOM_4v5tfv35TgWfM5foBKcs'),
+                        status: getUserAStatusIcon(),
+                      ),
+                    ),
+                    Expanded(
+                      child: PersonWithStatus(
+                        userImage: const NetworkImage(
+                            'https://media-exp1.licdn.com/dms/image/C5103AQEQRhS5GU68WA/profile-displayphoto-shrink_400_400/0/1545331992316?e=1626912000&v=beta&t=cJdEYKOYACtwZ0-qRA3S3b_Ddax4NH6Z-1dGGCNmtrg'),
+                        status: getUserBStatusIcon(),
+                      ),
+                    ),
+                    Expanded(
+                      child: PersonWithStatus(
+                        userImage: const NetworkImage(
+                            'https://media-exp1.licdn.com/dms/image/C5603AQGGhBt6Ckxytg/profile-displayphoto-shrink_400_400/0/1604068708768?e=1626912000&v=beta&t=vc4GysO1ftX8OUB6psN6XJkuz-QdNfygRx2WrCrPgcA'),
+                        status: getUserCStatusIcon(),
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: PersonWithStatus(
-                    userImage: const NetworkImage(
-                        'https://media-exp1.licdn.com/dms/image/C5103AQEQRhS5GU68WA/profile-displayphoto-shrink_400_400/0/1545331992316?e=1626912000&v=beta&t=cJdEYKOYACtwZ0-qRA3S3b_Ddax4NH6Z-1dGGCNmtrg'),
-                    status: getUserBStatusIcon(),
-                  ),
+                const SizedBox(
+                  height: 20.0,
                 ),
-                Expanded(
-                  child: PersonWithStatus(
-                    userImage: const NetworkImage(
-                        'https://media-exp1.licdn.com/dms/image/C5603AQGGhBt6Ckxytg/profile-displayphoto-shrink_400_400/0/1604068708768?e=1626912000&v=beta&t=vc4GysO1ftX8OUB6psN6XJkuz-QdNfygRx2WrCrPgcA'),
-                    status: getUserCStatusIcon(),
-                  ),
+                RoundedButton(
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                      isRunning = true;
+                    });
+                    while (isRunning) {
+                      VideoBrain _videoBrain = VideoBrain();
+                      VideoElement _videoElement =
+                          await _videoBrain.getVideoElement();
+                      callPoseNet(_videoElement, loggedInUser!.email as String);
+                      getUserALatestStatus();
+                      await Future.delayed(const Duration(seconds: 5));
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  },
+                  label: 'RUN',
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                RoundedOutlineButton(
+                  onPressed: () {
+                    launch(kGoogleMeetUrl);
+                  },
+                  label: 'TALK',
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            InkWell(
-              onTap: () => launch(kGoogleMeetUrl),
-              child: const Text('Launch Google Meet'),
-            ),
-            RoundedButton(
-              onPressed: () async {
-                while (isRunning) {
-                  VideoBrain _videoBrain = VideoBrain();
-                  VideoElement _videoElement =
-                      await _videoBrain.getVideoElement();
-                  callPoseNet(_videoElement, loggedInUser!.email as String);
-                  getUserALatestStatus();
-                  await Future.delayed(const Duration(seconds: 5));
-                }
-              },
-              label: 'RUN',
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+            if (isLoading)
+              Center(
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                  child: const ThinCircularProgressIndicator(),
+                ),
+              )
+            else
+              Container(),
           ],
         ),
       ),
