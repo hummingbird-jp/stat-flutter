@@ -17,6 +17,9 @@ class PersonWithStatus extends StatelessWidget {
             backgroundImage: userImage,
             radius: 60.0,
           ),
+          const SizedBox(
+            height: 30.0,
+          ),
           Icon(
             status,
             color: status == Icons.check ? Colors.green : Colors.red,
