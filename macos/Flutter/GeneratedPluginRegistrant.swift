@@ -11,6 +11,7 @@ import firebase_core
 import flutter_webrtc
 import path_provider_macos
 import sqflite
+import url_launcher_macos
 import window_size
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
@@ -20,5 +21,6 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FlutterWebRTCPlugin.register(with: registry.registrar(forPlugin: "FlutterWebRTCPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
+  UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
   WindowSizePlugin.register(with: registry.registrar(forPlugin: "WindowSizePlugin"))
 }
