@@ -16,17 +16,6 @@
 		<link rel="manifest" href="manifest.json" />
 	</head>
 	<body>
-		<div>
-			<video
-				id="video"
-				width="1080"
-				height="720"
-				autoplay
-				playsinline
-				style="display: none"
-			></video>
-		</div>
-
 		<!-- Tensorflow.js -->
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
@@ -58,6 +47,7 @@
 			};
 			firebase.initializeApp(firebaseConfig);
 			firebase.analytics();
+			var db = firebase.firestore();
 		</script>
 
 		<script src="status_brain.js" defer></script>

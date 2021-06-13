@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:stat_flutter/status_brain.dart';
 import 'package:stat_flutter/components/person_with_status.dart';
@@ -6,7 +8,8 @@ import 'package:stat_flutter/components/rounded_button.dart';
 import 'package:stat_flutter/components/rounded_outline_button.dart';
 import 'package:stat_flutter/components/user_info_drawer.dart';
 import 'package:stat_flutter/screens/video_screen.dart';
-import 'dart:js' as js;
+import 'package:stat_flutter/call_posenet.dart';
+import 'package:stat_flutter/video_brain.dart';
 
 class TeamScreen extends StatefulWidget {
   const TeamScreen({Key? key}) : super(key: key);
@@ -155,8 +158,15 @@ class _TeamScreenState extends State<TeamScreen> {
               color: Theme.of(context).backgroundColor,
             ),
             RoundedButton(
-              onPressed: () {
-                js.context.callMethod('estimatePoseOnVideo');
+              onPressed: () async {
+                while (true) {
+                  VideoBrain _videoBrain = VideoBrain();
+                  VideoElement _videoElement =
+                      await _videoBrain.getVideoElement();
+                  _videoElement.play();
+                  callPoseNet(_videoElement);
+                  await Future.delayed(const Duration(seconds: 5));
+                }
               },
               label: 'CALL JS',
               color: Colors.yellow,
