@@ -59,11 +59,34 @@ class _TeamScreenState extends State<TeamScreen> {
         .limit(1)
         .snapshots();
 
+    print('The value of the sp is: $snapshots');
+
     await for (var snapshot in snapshots) {
       for (var status in snapshot.docs) {
+        var wow = status.data();
+        print('The value of the input is: $wow');
+        var val = status.data()['isInView'];
+        print('The value of the input is: $val');
         setState(() {
           userAIsInView = status.data()['isInView'];
         });
+      }
+    }
+  }
+
+  void getTeamLatestStatus() async {
+    print("getTeamLatestStatus is called.");
+    Stream snapshots = _firestore
+        .collection('workspaces')
+        .where('name', isEqualTo: 'Stat! Dev')
+        .limit(1)
+        .snapshots();
+    print('The value of the sp is: $snapshots');
+
+    await for (var snapshot in snapshots) {
+      for (var val in snapshot.docs) {
+        var wow = val.data()['members'];
+        print('The value of the input is: $wow');
       }
     }
   }
@@ -140,6 +163,7 @@ class _TeamScreenState extends State<TeamScreen> {
                           await _videoBrain.getVideoElement();
                       callPoseNet(_videoElement, loggedInUser!.email as String);
                       getUserALatestStatus();
+                      getTeamLatestStatus();
                       await Future.delayed(const Duration(seconds: 5));
                       setState(() {
                         isLoading = false;
