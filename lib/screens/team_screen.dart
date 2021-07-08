@@ -29,7 +29,7 @@ class _TeamScreenState extends State<TeamScreen> {
   String? status;
   bool isRunning = false;
   bool isLoading = false;
-  bool userAIsInView = false;
+  bool userALatestIsInViewOnScreen = false;
   bool userBIsInView = false;
   bool userCIsInView = false;
 
@@ -59,16 +59,12 @@ class _TeamScreenState extends State<TeamScreen> {
         .limit(1)
         .snapshots();
 
-    print('The value of the sp is: $snapshots');
-
     await for (var snapshot in snapshots) {
       for (var status in snapshot.docs) {
-        var wow = status.data();
-        print('The value of the input is: $wow');
-        var val = status.data()['isInView'];
-        print('The value of the input is: $val');
+        bool userALatestIsInView = status.data()['isInView'];
+        //print('status of user A: ${userALatestIsInView.toString()}');
         setState(() {
-          userAIsInView = status.data()['isInView'];
+          userALatestIsInViewOnScreen = status.data()['isInView'];
         });
       }
     }
@@ -81,7 +77,6 @@ class _TeamScreenState extends State<TeamScreen> {
         .where('name', isEqualTo: 'Stat! Dev')
         .limit(1)
         .snapshots();
-    print('The value of the sp is: $snapshots');
 
     await for (var snapshot in snapshots) {
       for (var val in snapshot.docs) {
@@ -92,7 +87,7 @@ class _TeamScreenState extends State<TeamScreen> {
   }
 
   IconData getUserAStatusIcon() {
-    return userAIsInView == true ? Icons.check : Icons.block;
+    return userALatestIsInViewOnScreen == true ? Icons.check : Icons.block;
   }
 
   IconData getUserBStatusIcon() {
