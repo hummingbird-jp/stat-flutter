@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta content="IE=Edge" http-equiv="X-UA-Compatible" />
-		<meta name="description" content="A new Flutter project." />
+	<meta charset="UTF-8" />
+	<meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+	<meta name="description" content="A new Flutter project." />
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<meta name="apple-mobile-web-app-title" content="stat_flutter" />
-		<link rel="apple-touch-icon" href="icons/Icon-192.png" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-title" content="stat_flutter" />
+	<link rel="apple-touch-icon" href="icons/Icon-192.png" />
 
-		<link rel="icon" type="image/png" href="favicon.jpg" />
-
-		<title>stat_flutter</title>
-		<link rel="manifest" href="manifest.json" />
+	<head prefix="og: http://ogp.me/ns#">
+		<meta property="og:site_name" content="Stat! Flutter" />
+		<meta property="og:title" content="Stat! Flutter" />
+		<meta property="og:description" content="Demo app of Stat! Flutter" />
+		<meta property="og:url" content="https://stat-flutter-c4e6a.web.app/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@yhakamay" />
+		<!--<meta name="fb:app_id" content="数字15桁" />-->
 	</head>
+
+	<link rel="icon" type="image/png" href="favicon.jpg" />
+
+	<title>stat_flutter</title>
+	<link rel="manifest" href="manifest.json" />
+
 	<body>
+		<div class="loading">
+			<div class="loader"></div>
+		</div>
+
 		<!-- Tensorflow.js -->
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
