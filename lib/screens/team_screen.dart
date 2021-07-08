@@ -156,6 +156,7 @@ class _TeamScreenState extends State<TeamScreen> {
                       VideoBrain _videoBrain = VideoBrain();
                       VideoElement _videoElement =
                           await _videoBrain.getVideoElement();
+                      await Future.delayed(const Duration(milliseconds: 50));
                       callPoseNet(_videoElement, loggedInUser!.email as String);
                       getUserALatestStatus();
                       getTeamLatestStatus();
