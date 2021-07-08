@@ -14,30 +14,29 @@ function sendStatusToFirestore(isInView, email) {
 
 async function estimatePoseOnVideo(videoElement, email) {
 	const poseNet = await posenet.load();
-	let pose;
-	try {
-		pose = await poseNet.estimateSinglePose(videoElement, {
-			flipHorizontal: false,
-		});
-	} catch (e) {
-		pose = null;
+	const pose = await poseNet.estimateSinglePose(videoElement, {
+		flipHorizontal: false,
+	});
+	let _isInView = false;
+	let _confidence = 0.0;
+
+	if (pose === null) {
+		console.log('%cSkipped to send \'isInView\' and \'email\', since pose is null.', 'color: red;');
+	} else {
+		_isInView = _calcIsInView(pose);
+		_confidence = pose.score;
+
+		console.log(`_isInView: %c${_isInView}`, 'color: lightskyblue');
+		console.log(`_confidence: %c${_confidence}`, 'color: lightskyblue');
+		console.log(`-----\n\n`);
+
+		sendStatusToFirestore(_isInView, email);
 	}
-	const isInView = pose == null ? false : _isInView(pose);
-	const message = isInView ? "_isInView: true" : "_isInView: false";
 
-	console.log(message);
-	console.log(`pose.score: ${pose.score}`);
-
-	sendStatusToFirestore(isInView, email);
-
-	return isInView;
+	return _isInView;
 }
 
-function _isInView(pose) {
-	/* 全体のscoreが0.3未満==画面内にいない */
-	if (pose.score < 0.3) {
-		return false;
-	} else {
-		return true;
-	}
+function _calcIsInView(pose) {
+	/* 全体のscoreが0.3以上 → PCの前にいる */
+	return pose.score >= 0.3 ? true : false;
 }
