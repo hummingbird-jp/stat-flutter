@@ -71,7 +71,6 @@ class _TeamScreenState extends State<TeamScreen> {
   }
 
   void getTeamLatestStatus() async {
-    print("getTeamLatestStatus is called.");
     Stream snapshots = _firestore
         .collection('workspaces')
         .where('name', isEqualTo: 'Stat! Dev')
