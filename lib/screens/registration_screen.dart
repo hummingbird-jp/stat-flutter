@@ -114,9 +114,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             .createUserWithEmailAndPassword(
                                 email: email, password: password)
                             .then((result) {
-                          return result.user!.updateProfile(
-                            displayName: displayName,
-                          );
+                          return result.user!.updateDisplayName(displayName);
                         });
                         setState(() {
                           isLoading = false;
