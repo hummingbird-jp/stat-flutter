@@ -79,9 +79,10 @@ class _TeamScreenState extends State<TeamScreen> {
         .snapshots();
 
     await for (var snapshot in snapshots) {
-      for (var val in snapshot.docs) {
-        var wow = val.data()['members'];
-        print('The value of the input is: $wow');
+      for (var workspace in snapshot.docs) {
+        List<dynamic> membersEmails = workspace.data()['membersEmails'];
+        print('1st member in Stat! Dev: ${membersEmails[0]}');
+        print('2nd member in Stat! Dev: ${membersEmails[1]}');
       }
     }
   }
