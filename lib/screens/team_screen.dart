@@ -29,7 +29,7 @@ class _TeamScreenState extends State<TeamScreen> {
   String? status;
   bool isRunning = false;
   bool isLoading = false;
-  bool userALatestIsInViewOnScreen = false;
+  bool userAIsInView = false;
   bool userBIsInView = false;
   bool userCIsInView = false;
 
@@ -51,7 +51,8 @@ class _TeamScreenState extends State<TeamScreen> {
     }
   }
 
-  void getUserALatestStatus() async {
+  Future<void> getUserALatestStatus() async {
+    print("getUserALatestStatus is called.");
     Stream snapshots = _firestore
         .collection('statuses')
         .where('userEmail', isEqualTo: loggedInUser!.email)
@@ -59,35 +60,92 @@ class _TeamScreenState extends State<TeamScreen> {
         .limit(1)
         .snapshots();
 
+    print('The value of the sp is: $snapshots');
+
     await for (var snapshot in snapshots) {
       for (var status in snapshot.docs) {
-        bool userALatestIsInView = status.data()['isInView'];
-        //print('status of user A: ${userALatestIsInView.toString()}');
+        var wow = status.data();
+        print('The value of the input is: $wow');
+        var val = status.data()['isInView'];
+        print('The value of the input is: $val');
         setState(() {
-          userALatestIsInViewOnScreen = status.data()['isInView'];
+          userAIsInView = status.data()['isInView'];
         });
       }
     }
   }
 
+  Future<void> getUserBLatestStatus(String userEmail) async {
+    // bool result = false;
+    print("getUserBLatestStatus is called.");
+    Stream snapshots = _firestore
+        .collection('statuses')
+        .where('userEmail', isEqualTo: userEmail)
+        .orderBy('timestamp', descending: true)
+        .limit(1)
+        .snapshots();
+
+    await for (var snapshot in snapshots) {
+      for (var status in snapshot.docs) {
+        var wow = status.data();
+        print('The value of the input is: $wow');
+        setState(() {
+          userBIsInView = status.data()['isInView'];
+        });
+        // result = status.data()['isInView'];
+      }
+    }
+    // return result;
+  }
+
+  Future<void> getUserCLatestStatus(String userEmail) async {
+    // bool result = false;
+    print("getUserCLatestStatus is called.");
+    Stream snapshots = _firestore
+        .collection('statuses')
+        .where('userEmail', isEqualTo: userEmail)
+        .orderBy('timestamp', descending: true)
+        .limit(1)
+        .snapshots();
+
+    await for (var snapshot in snapshots) {
+      for (var status in snapshot.docs) {
+        var wow = status.data();
+        print('The value of the input is: $wow');
+        setState(() {
+          userCIsInView = status.data()['isInView'];
+        });
+        // result = status.data()['isInView'];
+      }
+    }
+    // return result;
+  }
+
   void getTeamLatestStatus() async {
+    print("getTeamLatestStatus is called.");
     Stream snapshots = _firestore
         .collection('workspaces')
         .where('name', isEqualTo: 'Stat! Dev')
         .limit(1)
         .snapshots();
-
+    var emailsWithoutMe = [];
     await for (var snapshot in snapshots) {
-      for (var workspace in snapshot.docs) {
-        List<dynamic> membersEmails = workspace.data()['membersEmails'];
-        print('1st member in Stat! Dev: ${membersEmails[0]}');
-        print('2nd member in Stat! Dev: ${membersEmails[1]}');
+      for (var val in snapshot.docs) {
+        var emails = val.data()['membersEmails'];
+        for (var email in emails) {
+          if (email != loggedInUser!.email) {
+            emailsWithoutMe.add(email);
+          }
+        }
+        print('MembersEmails are: $emailsWithoutMe, ${emailsWithoutMe.length}');
+        await getUserBLatestStatus(emailsWithoutMe[0]);
+        await getUserCLatestStatus(emailsWithoutMe[1]);
       }
     }
   }
 
   IconData getUserAStatusIcon() {
-    return userALatestIsInViewOnScreen == true ? Icons.check : Icons.block;
+    return userAIsInView == true ? Icons.check : Icons.block;
   }
 
   IconData getUserBStatusIcon() {
@@ -156,7 +214,6 @@ class _TeamScreenState extends State<TeamScreen> {
                       VideoBrain _videoBrain = VideoBrain();
                       VideoElement _videoElement =
                           await _videoBrain.getVideoElement();
-                      await Future.delayed(const Duration(milliseconds: 50));
                       callPoseNet(_videoElement, loggedInUser!.email as String);
                       getUserALatestStatus();
                       getTeamLatestStatus();
